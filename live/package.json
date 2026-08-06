@@ -1,0 +1,29 @@
+{
+  "name": "module-8-agents",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Module 8 — agents on the Vercel AI SDK. Nineteen exercises and a terminal UI.",
+  "scripts": {
+    "verify": "tsx exercises/verify.ts",
+    "ex": "tsx exercises/_run.ts",
+    "ex:all": "tsx exercises/run-all.ts",
+    "tui": "tsx exercises/40-tui.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "4.0.30",
+    "@ai-sdk/openai": "4.0.30",
+    "@ai-sdk/tui": "1.0.53",
+    "@supabase/supabase-js": "^2.49.4",
+    "@tavily/core": "^0.7.6",
+    "ai": "7.0.52",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}
