@@ -1,8 +1,0 @@
-HTTP/2 302 
-cache-control: no-store, max-age=0
-content-type: text/plain
-date: Wed, 05 Aug 2026 14:47:28 GMT
-location: https://vercel.com/sso-api?url=https%3A%2F%2Fmuse-scout-vladimirdeziegler-gmailcoms-projects.vercel.app%2Fapi%2Fhealth&nonce=572df9ef3b65d436c94f2cac7e325f7913321e9a450d67a1fba3e6dbd4b054b8
-server: Vercel
-set-cookie: _vercel_sso_nonce=33f1431b8c7d99de05b0940469ffb3cadb7c4c13854ad60b; Max-Age=3600; Path=/; Secure; HttpOnly; SameSite=Lax
-strict-transport-security: max-age=63072000; includeSubDomains; preload

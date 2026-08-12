@@ -1,2 +1,0 @@
-time_to_first_byte: 38.931357s  total: 38.932241s
-time_to_first_byte: 0.545390s  total: 35.088934s
