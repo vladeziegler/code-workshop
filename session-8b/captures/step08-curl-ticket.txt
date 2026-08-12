@@ -1,0 +1,1 @@
+status: done | kind: deep_dive | result: **Open-source LLMs — snapshot, August 5, 2026 (≈260 words).** The leading *open-weight* families are DeepSeek V4 (large MoE variants), Mistral Large 3

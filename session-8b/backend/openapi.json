@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "muse-scout",
+    "description": "A web-search agent behind an API. POST /api/chat runs the agent and streams the answer back as Server-Sent Events; the other endpoints return plain JSON. This file is for exploring the API (paste into editor.swagger.io or import into Postman) — it is not served by the app.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://muse-scout-vladimirdeziegler-gmailcoms-projects.vercel.app", "description": "production" },
+    { "url": "http://localhost:3000", "description": "local dev" }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Liveness check",
+        "responses": {
+          "200": {
+            "description": "Service is up",
+            "content": {
+              "application/json": {
+                "example": { "ok": true, "service": "muse-scout" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chat": {
+      "post": {
+        "summary": "Run the agent (streaming)",
+        "description": "Kickstarts the agent with the chat messages. The response is text/event-stream: labeled JSON events (text-delta, tool-input-available, source-url, finish, ...) ending with `data: [DONE]`. Swagger UI buffers streams — use `curl -N` to watch tokens arrive. Include `id` to load/save the conversation server-side.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "conv-demo-1",
+                "messages": [
+                  {
+                    "id": "m1",
+                    "role": "user",
+                    "parts": [{ "type": "text", "text": "What happened in AI news today? Two lines, with sources." }]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSE stream of UI-message events",
+            "content": {
+              "text/event-stream": {
+                "example": "data: {\"type\":\"start\"}\n\ndata: {\"type\":\"text-delta\",\"id\":\"msg_...\",\"delta\":\"The\"}\n\ndata: [DONE]"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversations": {
+      "get": {
+        "summary": "List conversations",
+        "responses": {
+          "200": {
+            "description": "Most recent conversations, newest first",
+            "content": {
+              "application/json": {
+                "example": [
+                  { "id": "conv-demo-1", "title": "What happened in AI news today?", "updated_at": "2026-08-06T09:08:40.325+00:00" }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/conversations/{id}": {
+      "get": {
+        "summary": "One conversation's messages",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "The stored message array for this conversation id (empty array if the id is unknown — the endpoint does not 404)",
+            "content": {
+              "application/json": {
+                "example": [
+                  { "id": "m1", "role": "user", "parts": [{ "type": "text", "text": "My favorite color is teal. What is 3+3?" }] },
+                  { "id": "m2", "role": "assistant", "parts": [{ "type": "text", "text": "3 + 3 = 6." }] }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs/{id}": {
+      "get": {
+        "summary": "Job-ticket status/result",
+        "description": "Redeem a job id returned by the deep_dive tool. Poll until status is done or failed.",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current job state",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "queued": { "value": { "status": "queued", "kind": "deep_dive" } },
+                  "done": { "value": { "status": "done", "kind": "deep_dive", "result": "**Open-source LLMs — snapshot** …" } }
+                }
+              }
+            }
+          },
+          "404": { "description": "No job under this id" }
+        }
+      }
+    }
+  }
+}
