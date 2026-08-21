@@ -1,0 +1,9 @@
+anthropic
+composio
+fastapi
+openai
+pydantic
+python-dotenv
+requests
+supabase
+uvicorn

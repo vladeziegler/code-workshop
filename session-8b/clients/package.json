@@ -1,0 +1,15 @@
+{
+  "name": "scout-clients",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tui:remote": "tsx tui-remote.ts"
+  },
+  "devDependencies": {
+    "@ai-sdk/tui": "1.0.53",
+    "ai": "7.0.52",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "muse-scout",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "tui": "tsx exercises/01-tui-local.ts",
+    "ex": "tsx exercises/_run.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "4.0.30",
+    "@supabase/supabase-js": "^2.49.4",
+    "ai": "7.0.52",
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@ai-sdk/tui": "1.0.53",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}

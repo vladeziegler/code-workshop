@@ -1,9 +1,11 @@
+node_modules/
+.next/
 .env
 .env.*
 !.env.example
-node_modules/
-__pycache__/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+live/.git-local-backup/
 .DS_Store
-audit/
-*.pptx
-DECK.html
+__pycache__/
